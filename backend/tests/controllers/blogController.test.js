@@ -3,7 +3,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const User = require('../../models/User');
 const Blog = require('../../models/Blog');
-const { getBlogs, getBlogById, createBlog, updateBlog, deleteBlog } = require('../../controllers/blogController');
+const {
+  getBlogs,
+  getBlogById,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+} = require('../../controllers/blogController');
 
 const app = express();
 app.use(express.json());
@@ -17,7 +23,7 @@ describe('Blog Controller Tests', () => {
       first_name: 'John',
       last_name: 'Doe',
       bio: 'Test author',
-      profile_pic_url: 'https://example.com/john.jpg'
+      profile_pic_url: 'https://example.com/john.jpg',
     });
 
     testBlog = await Blog.create({
@@ -26,18 +32,18 @@ describe('Blog Controller Tests', () => {
       content: 'Test content',
       slug: 'test-blog',
       tags: ['test', 'blog'],
-      author: testUser._id
+      author: testUser._id,
     });
   });
 
   describe('getBlogs', () => {
     it('should return blogs with pagination', async () => {
       const req = {
-        query: { page: 1, limit: 10 }
+        query: { page: 1, limit: 10 },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getBlogs(req, res);
@@ -49,19 +55,19 @@ describe('Blog Controller Tests', () => {
             current_page: 1,
             total_pages: 1,
             total_blogs: 1,
-            blogs_per_page: 10
-          })
+            blogs_per_page: 10,
+          }),
         })
       );
     });
 
     it('should filter blogs by tags', async () => {
       const req = {
-        query: { tags: 'test' }
+        query: { tags: 'test' },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getBlogs(req, res);
@@ -71,9 +77,9 @@ describe('Blog Controller Tests', () => {
           blogs: expect.arrayContaining([
             expect.objectContaining({
               title: 'Test Blog',
-              tags: expect.arrayContaining(['test'])
-            })
-          ])
+              tags: expect.arrayContaining(['test']),
+            }),
+          ]),
         })
       );
     });
@@ -82,11 +88,11 @@ describe('Blog Controller Tests', () => {
   describe('getBlogById', () => {
     it('should return a blog by id', async () => {
       const req = {
-        params: { id: testBlog._id }
+        params: { id: testBlog._id },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getBlogById(req, res);
@@ -94,7 +100,7 @@ describe('Blog Controller Tests', () => {
       expect(res.json).toHaveBeenCalledWith(
         expect.objectContaining({
           _id: testBlog._id.toString(),
-          title: 'Test Blog'
+          title: 'Test Blog',
         })
       );
     });
@@ -102,11 +108,11 @@ describe('Blog Controller Tests', () => {
     it('should return 404 for non-existent blog', async () => {
       const fakeId = new mongoose.Types.ObjectId();
       const req = {
-        params: { id: fakeId }
+        params: { id: fakeId },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getBlogById(req, res);
@@ -124,15 +130,15 @@ describe('Blog Controller Tests', () => {
         content: 'New content',
         slug: 'new-blog',
         tags: ['new', 'blog'],
-        author: testUser._id
+        author: testUser._id,
       };
 
       const req = {
-        body: blogData
+        body: blogData,
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await createBlog(req, res);
@@ -141,7 +147,7 @@ describe('Blog Controller Tests', () => {
       expect(res.json).toHaveBeenCalledWith(
         expect.objectContaining({
           title: 'New Blog',
-          slug: 'new-blog'
+          slug: 'new-blog',
         })
       );
     });
@@ -151,15 +157,15 @@ describe('Blog Controller Tests', () => {
         title: 'Duplicate Blog',
         content: 'Content',
         slug: 'test-blog',
-        author: testUser._id
+        author: testUser._id,
       };
 
       const req = {
-        body: blogData
+        body: blogData,
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await createBlog(req, res);
@@ -173,16 +179,16 @@ describe('Blog Controller Tests', () => {
     it('should update an existing blog', async () => {
       const updateData = {
         title: 'Updated Blog',
-        content: 'Updated content'
+        content: 'Updated content',
       };
 
       const req = {
         params: { id: testBlog._id },
-        body: updateData
+        body: updateData,
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await updateBlog(req, res);
@@ -191,7 +197,7 @@ describe('Blog Controller Tests', () => {
         expect.objectContaining({
           _id: testBlog._id.toString(),
           title: 'Updated Blog',
-          content: 'Updated content'
+          content: 'Updated content',
         })
       );
     });
@@ -200,11 +206,11 @@ describe('Blog Controller Tests', () => {
       const fakeId = new mongoose.Types.ObjectId();
       const req = {
         params: { id: fakeId },
-        body: { title: 'Updated' }
+        body: { title: 'Updated' },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await updateBlog(req, res);
@@ -218,16 +224,16 @@ describe('Blog Controller Tests', () => {
         title: 'Another Blog',
         content: 'Content',
         slug: 'another-blog',
-        author: testUser._id
+        author: testUser._id,
       });
 
       const req = {
         params: { id: testBlog._id },
-        body: { slug: 'another-blog' }
+        body: { slug: 'another-blog' },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await updateBlog(req, res);
@@ -240,26 +246,28 @@ describe('Blog Controller Tests', () => {
   describe('deleteBlog', () => {
     it('should delete an existing blog', async () => {
       const req = {
-        params: { id: testBlog._id }
+        params: { id: testBlog._id },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await deleteBlog(req, res);
 
-      expect(res.json).toHaveBeenCalledWith({ message: 'Blog deleted successfully' });
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'Blog deleted successfully',
+      });
     });
 
     it('should return 404 for non-existent blog', async () => {
       const fakeId = new mongoose.Types.ObjectId();
       const req = {
-        params: { id: fakeId }
+        params: { id: fakeId },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await deleteBlog(req, res);
@@ -268,4 +276,4 @@ describe('Blog Controller Tests', () => {
       expect(res.json).toHaveBeenCalledWith({ error: 'Blog not found' });
     });
   });
-}); 
+});

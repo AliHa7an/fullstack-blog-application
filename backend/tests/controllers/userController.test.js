@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const User = require('../../models/User');
-const { getUsers, getUserById, createUser, updateUser, deleteUser } = require('../../controllers/userController');
+const {
+  getUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require('../../controllers/userController');
 
 describe('User Controller Tests', () => {
   let testUser;
@@ -10,18 +16,18 @@ describe('User Controller Tests', () => {
       first_name: 'John',
       last_name: 'Doe',
       bio: 'Test user',
-      profile_pic_url: 'https://example.com/john.jpg'
+      profile_pic_url: 'https://example.com/john.jpg',
     });
   });
 
   describe('getUsers', () => {
     it('should return users with pagination', async () => {
       const req = {
-        query: { page: 1, limit: 10 }
+        query: { page: 1, limit: 10 },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getUsers(req, res);
@@ -33,8 +39,8 @@ describe('User Controller Tests', () => {
             current_page: 1,
             total_pages: 1,
             total_users: 1,
-            users_per_page: 10
-          })
+            users_per_page: 10,
+          }),
         })
       );
     });
@@ -43,11 +49,11 @@ describe('User Controller Tests', () => {
   describe('getUserById', () => {
     it('should return a user by id', async () => {
       const req = {
-        params: { id: testUser._id }
+        params: { id: testUser._id },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getUserById(req, res);
@@ -56,7 +62,7 @@ describe('User Controller Tests', () => {
         expect.objectContaining({
           _id: testUser._id.toString(),
           first_name: 'John',
-          last_name: 'Doe'
+          last_name: 'Doe',
         })
       );
     });
@@ -64,11 +70,11 @@ describe('User Controller Tests', () => {
     it('should return 404 for non-existent user', async () => {
       const fakeId = new mongoose.Types.ObjectId();
       const req = {
-        params: { id: fakeId }
+        params: { id: fakeId },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await getUserById(req, res);
@@ -84,15 +90,15 @@ describe('User Controller Tests', () => {
         first_name: 'Jane',
         last_name: 'Smith',
         bio: 'New user',
-        profile_pic_url: 'https://example.com/jane.jpg'
+        profile_pic_url: 'https://example.com/jane.jpg',
       };
 
       const req = {
-        body: userData
+        body: userData,
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await createUser(req, res);
@@ -101,7 +107,7 @@ describe('User Controller Tests', () => {
       expect(res.json).toHaveBeenCalledWith(
         expect.objectContaining({
           first_name: 'Jane',
-          last_name: 'Smith'
+          last_name: 'Smith',
         })
       );
     });
@@ -111,16 +117,16 @@ describe('User Controller Tests', () => {
     it('should update an existing user', async () => {
       const updateData = {
         first_name: 'Updated John',
-        bio: 'Updated bio'
+        bio: 'Updated bio',
       };
 
       const req = {
         params: { id: testUser._id },
-        body: updateData
+        body: updateData,
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await updateUser(req, res);
@@ -129,7 +135,7 @@ describe('User Controller Tests', () => {
         expect.objectContaining({
           _id: testUser._id.toString(),
           first_name: 'Updated John',
-          bio: 'Updated bio'
+          bio: 'Updated bio',
         })
       );
     });
@@ -138,11 +144,11 @@ describe('User Controller Tests', () => {
       const fakeId = new mongoose.Types.ObjectId();
       const req = {
         params: { id: fakeId },
-        body: { first_name: 'Updated' }
+        body: { first_name: 'Updated' },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await updateUser(req, res);
@@ -155,26 +161,28 @@ describe('User Controller Tests', () => {
   describe('deleteUser', () => {
     it('should delete an existing user', async () => {
       const req = {
-        params: { id: testUser._id }
+        params: { id: testUser._id },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await deleteUser(req, res);
 
-      expect(res.json).toHaveBeenCalledWith({ message: 'User deleted successfully' });
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'User deleted successfully',
+      });
     });
 
     it('should return 404 for non-existent user', async () => {
       const fakeId = new mongoose.Types.ObjectId();
       const req = {
-        params: { id: fakeId }
+        params: { id: fakeId },
       };
       const res = {
         json: jest.fn(),
-        status: jest.fn().mockReturnThis()
+        status: jest.fn().mockReturnThis(),
       };
 
       await deleteUser(req, res);
@@ -183,4 +191,4 @@ describe('User Controller Tests', () => {
       expect(res.json).toHaveBeenCalledWith({ error: 'User not found' });
     });
   });
-}); 
+});

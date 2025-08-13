@@ -1,12 +1,14 @@
+'use client';
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBlogs, setSearchQuery } from './store/blogSlice';
-import BlogCard from './components/BlogCard';
-import SearchBar from './components/SearchBar';
-import TagCategories from './components/TagCategories';
-import './App.css';
+import { fetchBlogs, setSearchQuery } from '../store/blogSlice';
+import BlogCard from '../components/BlogCard';
+import SearchBar from '../components/SearchBar';
+import TagCategories from '../components/TagCategories';
+import '../styles/App.css';
 
-function App() {
+export default function Home() {
   const dispatch = useDispatch();
   const { blogs, pagination, loading, error, searchQuery } = useSelector(
     state => state.blogs
@@ -225,5 +227,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

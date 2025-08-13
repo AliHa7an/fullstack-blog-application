@@ -10,7 +10,9 @@ const PORT = process.env.PORT || 3020;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/SampleBlogs');
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/SampleBlogs'
+);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -25,4 +27,4 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-}); 
+});

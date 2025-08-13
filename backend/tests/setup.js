@@ -20,4 +20,4 @@ afterEach(async () => {
     const collection = collections[key];
     await collection.deleteMany();
   }
-}); 
+});

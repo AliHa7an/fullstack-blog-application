@@ -18,7 +18,7 @@ describe('Blog Routes Integration Tests', () => {
       first_name: 'John',
       last_name: 'Doe',
       bio: 'Test author',
-      profile_pic_url: 'https://example.com/john.jpg'
+      profile_pic_url: 'https://example.com/john.jpg',
     });
 
     testBlog = await Blog.create({
@@ -27,7 +27,7 @@ describe('Blog Routes Integration Tests', () => {
       content: 'Test content',
       slug: 'test-blog',
       tags: ['test', 'blog'],
-      author: testUser._id
+      author: testUser._id,
     });
   });
 
@@ -76,9 +76,7 @@ describe('Blog Routes Integration Tests', () => {
 
     it('should return 404 for non-existent blog', async () => {
       const fakeId = new mongoose.Types.ObjectId();
-      await request(app)
-        .get(`/api/blogs/${fakeId}`)
-        .expect(404);
+      await request(app).get(`/api/blogs/${fakeId}`).expect(404);
     });
   });
 
@@ -90,7 +88,7 @@ describe('Blog Routes Integration Tests', () => {
         content: 'New content',
         slug: 'new-blog',
         tags: ['new', 'blog'],
-        author: testUser._id
+        author: testUser._id,
       };
 
       const response = await request(app)
@@ -107,13 +105,10 @@ describe('Blog Routes Integration Tests', () => {
         title: 'Duplicate Blog',
         content: 'Content',
         slug: 'test-blog',
-        author: testUser._id
+        author: testUser._id,
       };
 
-      await request(app)
-        .post('/api/blogs')
-        .send(blogData)
-        .expect(400);
+      await request(app).post('/api/blogs').send(blogData).expect(400);
     });
   });
 
@@ -121,7 +116,7 @@ describe('Blog Routes Integration Tests', () => {
     it('should update an existing blog', async () => {
       const updateData = {
         title: 'Updated Blog',
-        content: 'Updated content'
+        content: 'Updated content',
       };
 
       const response = await request(app)
@@ -146,7 +141,7 @@ describe('Blog Routes Integration Tests', () => {
         title: 'Another Blog',
         content: 'Content',
         slug: 'another-blog',
-        author: testUser._id
+        author: testUser._id,
       });
 
       await request(app)
@@ -158,9 +153,7 @@ describe('Blog Routes Integration Tests', () => {
 
   describe('DELETE /api/blogs/:id', () => {
     it('should delete an existing blog', async () => {
-      await request(app)
-        .delete(`/api/blogs/${testBlog._id}`)
-        .expect(200);
+      await request(app).delete(`/api/blogs/${testBlog._id}`).expect(200);
 
       const deletedBlog = await Blog.findById(testBlog._id);
       expect(deletedBlog).toBeNull();
@@ -168,9 +161,7 @@ describe('Blog Routes Integration Tests', () => {
 
     it('should return 404 for non-existent blog', async () => {
       const fakeId = new mongoose.Types.ObjectId();
-      await request(app)
-        .delete(`/api/blogs/${fakeId}`)
-        .expect(404);
+      await request(app).delete(`/api/blogs/${fakeId}`).expect(404);
     });
   });
-}); 
+});

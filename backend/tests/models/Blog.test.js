@@ -10,7 +10,7 @@ describe('Blog Model Test', () => {
       first_name: 'John',
       last_name: 'Doe',
       bio: 'Test author',
-      profile_pic_url: 'https://example.com/john.jpg'
+      profile_pic_url: 'https://example.com/john.jpg',
     });
   });
 
@@ -21,7 +21,7 @@ describe('Blog Model Test', () => {
       content: 'Test content',
       slug: 'test-blog',
       tags: ['test', 'blog'],
-      author: testUser._id
+      author: testUser._id,
     });
 
     const savedBlog = await validBlog.save();
@@ -36,7 +36,7 @@ describe('Blog Model Test', () => {
     const blogWithoutTitle = new Blog({
       content: 'Test content',
       slug: 'test-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     let err;
@@ -53,7 +53,7 @@ describe('Blog Model Test', () => {
     const blogWithoutContent = new Blog({
       title: 'Test Blog',
       slug: 'test-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     let err;
@@ -70,7 +70,7 @@ describe('Blog Model Test', () => {
     const blogWithoutSlug = new Blog({
       title: 'Test Blog',
       content: 'Test content',
-      author: testUser._id
+      author: testUser._id,
     });
 
     let err;
@@ -87,7 +87,7 @@ describe('Blog Model Test', () => {
     const blogWithoutAuthor = new Blog({
       title: 'Test Blog',
       content: 'Test content',
-      slug: 'test-blog'
+      slug: 'test-blog',
     });
 
     let err;
@@ -105,14 +105,14 @@ describe('Blog Model Test', () => {
       title: 'First Blog',
       content: 'First content',
       slug: 'first-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     const blog2 = new Blog({
       title: 'Second Blog',
       content: 'Second content',
       slug: 'first-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     await blog1.save();
@@ -134,7 +134,7 @@ describe('Blog Model Test', () => {
       content: 'Test content',
       slug: 'test-blog',
       tags: ['  test  ', '  blog  '],
-      author: testUser._id
+      author: testUser._id,
     });
 
     const savedBlog = await blog.save();
@@ -148,7 +148,7 @@ describe('Blog Model Test', () => {
       title: 'Test Blog',
       content: 'Test content',
       slug: 'test-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     const savedBlog = await blog.save();
@@ -161,14 +161,16 @@ describe('Blog Model Test', () => {
       title: 'Test Blog',
       content: 'Test content',
       slug: 'test-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     await blog.save();
-    
-    const populatedBlog = await Blog.findById(blog._id)
-      .populate('author', 'first_name last_name bio profile_pic_url');
-    
+
+    const populatedBlog = await Blog.findById(blog._id).populate(
+      'author',
+      'first_name last_name bio profile_pic_url'
+    );
+
     expect(populatedBlog.author).toBeDefined();
     expect(populatedBlog.author.first_name).toBe('John');
     expect(populatedBlog.author.last_name).toBe('Doe');
@@ -179,7 +181,7 @@ describe('Blog Model Test', () => {
       title: 'Test Blog',
       content: 'Test content',
       slug: 'test-blog',
-      author: testUser._id
+      author: testUser._id,
     });
 
     const savedBlog = await blog.save();
@@ -187,4 +189,4 @@ describe('Blog Model Test', () => {
     expect(savedBlog.modified_date).toBeDefined();
     expect(savedBlog.created_date).toEqual(savedBlog.modified_date);
   });
-}); 
+});
