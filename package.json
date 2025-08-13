@@ -1,0 +1,36 @@
+{
+  "name": "blog-application",
+  "version": "1.0.0",
+  "description": "Blog application with frontend, backend, and Next.js",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "nextjs"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm run install:frontend && npm run install:backend && npm run install:nextjs",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:nextjs": "cd nextjs && npm install",
+    "lint:all": "npm run lint:frontend && npm run lint:backend && npm run lint:nextjs",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:nextjs": "cd nextjs && npm run lint",
+    "lint:fix:all": "npm run lint:fix:frontend && npm run lint:fix:backend && npm run lint:fix:nextjs",
+    "lint:fix:frontend": "cd frontend && npm run lint:fix",
+    "lint:fix:backend": "cd backend && npm run lint:fix",
+    "lint:fix:nextjs": "cd nextjs && npm run lint:fix",
+    "format:all": "npm run format:frontend && npm run format:backend && npm run format:nextjs",
+    "format:frontend": "cd frontend && npm run format",
+    "format:backend": "cd backend && npm run format",
+    "format:nextjs": "cd nextjs && npm run format",
+    "format:check:all": "npm run format:check:frontend && npm run format:check:backend && npm run format:check:nextjs",
+    "format:check:frontend": "cd frontend && npm run format:check",
+    "format:check:backend": "cd backend && npm run format:check",
+    "format:check:nextjs": "cd nextjs && npm run format:check"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
+}

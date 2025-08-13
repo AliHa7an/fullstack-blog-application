@@ -1,0 +1,223 @@
+# Dependencies - All projects
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/package-lock.json
+**/yarn.lock
+
+# Environment variables - All projects
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Build outputs - All projects
+**/build/
+**/dist/
+**/.next/
+**/out/
+
+# Expo - Mobile app specific
+app/.expo/
+app/.expo-shared/
+app/*.jks
+app/*.p8
+app/*.p12
+app/*.key
+app/*.mobileprovision
+app/*.orig.*
+app/web-build/
+
+# React Native - Mobile app specific
+app/*.hprof
+app/.gradle/
+app/local.properties
+app/*.iml
+app/.DS_Store
+app/*.swp
+app/*.swo
+app/*~
+
+# iOS - Mobile app specific
+app/ios/build/
+app/ios/Pods/
+app/ios/*.xcworkspace
+app/ios/*.xcodeproj
+app/ios/DerivedData/
+app/ios/App/build/
+
+# Android - Mobile app specific
+app/android/app/build/
+app/android/build/
+app/android/gradle/
+app/android/local.properties
+app/android/.gradle/
+app/android/captures/
+app/android/gradlew
+app/android/gradlew.bat
+app/android/local.properties
+app/android/.idea/
+app/android/*.iml
+app/android/app/release/
+
+# Backend specific
+backend/logs/
+backend/uploads/
+backend/temp/
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+
+# Frontend specific
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.cache/
+frontend/public/sw.js
+frontend/public/workbox-*.js
+frontend/public/worker-*.js
+
+# Logs - All projects
+**/logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/lerna-debug.log*
+
+# Runtime data - All projects
+**/pids
+**/*.pid
+**/*.seed
+**/*.pid.lock
+
+# Coverage directory used by tools like istanbul - All projects
+**/coverage/
+**/*.lcov
+
+# nyc test coverage - All projects
+**/.nyc_output
+
+# Dependency directories - All projects
+**/jspm_packages/
+
+# Optional npm cache directory - All projects
+**/.npm
+
+# Optional eslint cache - All projects
+**/.eslintcache
+
+# Microbundle cache - All projects
+**/.rpt2_cache/
+**/.rts2_cache_cjs/
+**/.rts2_cache_es/
+**/.rts2_cache_umd/
+
+# Optional REPL history - All projects
+**/.node_repl_history
+
+# Output of 'npm pack' - All projects
+**/*.tgz
+
+# Yarn Integrity file - All projects
+**/.yarn-integrity
+
+# parcel-bundler cache - All projects
+**/.cache
+**/.parcel-cache
+
+# Next.js build output - Frontend specific
+frontend/.next
+
+# Nuxt.js build / generate output - Frontend specific
+frontend/.nuxt
+frontend/dist
+
+# Gatsby files - Frontend specific
+frontend/.cache/
+frontend/public
+
+# Storybook build outputs - Frontend specific
+frontend/.out
+frontend/.storybook-out
+
+# Temporary folders - All projects
+**/tmp/
+**/temp/
+
+# Editor directories and files - All projects
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/*~
+
+# OS generated files - All projects
+**/.DS_Store
+**/.DS_Store?
+**/._*
+**/.Spotlight-V100
+**/.Trashes
+**/ehthumbs.db
+**/Thumbs.db
+
+# Database files - All projects
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Backup files - All projects
+**/*.bak
+**/*.backup
+
+# Test files - All projects
+**/test-results/
+**/playwright-report/
+**/playwright/.cache/
+
+# Local development - All projects
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Sentry - All projects
+**/.sentryclirc
+
+# Vercel - Frontend specific
+frontend/.vercel
+
+# TypeScript - All projects
+**/*.tsbuildinfo
+
+# PWA files - Frontend specific
+frontend/public/sw.js
+frontend/public/workbox-*.js
+frontend/public/worker-*.js
+frontend/public/sw.js.map
+frontend/public/workbox-*.js.map
+frontend/public/worker-*.js.map
+
+# Serverless directories - Backend specific
+backend/.serverless/
+
+# FuseBox cache - All projects
+**/.fusebox/
+
+# DynamoDB Local files - Backend specific
+backend/.dynamodb/
+
+# TernJS port file - All projects
+**/.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions - All projects
+**/.vscode-test
+
+# yarn v2 - All projects
+**/.yarn/cache
+**/.yarn/unplugged
+**/.yarn/build-state.yml
+**/.yarn/install-state.gz
+**/.pnp.* 
